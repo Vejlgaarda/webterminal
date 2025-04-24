@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Farewell BT</title>
+  <style>
+    body {
+      background-color: black;
+      color: #00ff00;
+      font-family: "Courier New", Courier, monospace;
+      padding: 1rem;
+      white-space: pre-wrap;
+      overflow-x: hidden;
+    }
+    .cursor {
+      display: inline-block;
+      width: 10px;
+      height: 1em;
+      background-color: #00ff00;
+      animation: blink 1s steps(2, start) infinite;
+    }
+    @keyframes blink {
+      to { visibility: hidden; }
+    }
+  </style>
+</head>
+<body>
+  <div id="terminal"></div>
+  <script>
+    const messages = [
+
+    `BT (Mr Concrete), Really sad to hear the news you are heading back home! You will be really missed!!! Looking forward to coming up to visit you sometime soon… let’s plan! 
+    All the best mate!– Henry <3`,
+    
+    `HEJ BT! I really enjoyed working with you on our little but mighty booklet over the past months.I hope this new chapter will bring new adventures and joys to you. I hope to cross paths again soon. 
+    Keep being you! – Candela`,
+
+    `Hi BT, So sorry to hear that you are leaving us at GXN – really enjoyed working with you! But let’s stay in touch and see you at Copenhell! 
+    – Best, My`,
+
+    `Dearest BT, I am incredibly sad to see you head back to the Norwegian mountains, and I’ll miss working, thinking, and watching niche skiing/hockey with you in the office. 
+    – Good luck, Liam`,
+
+    `BT, Thank you for your time in GXN. It’s been a true pleasure having you on the team. 
+    Best of luck in Norway! – Lasse`,
+
+    `BT! I’m so sad to hear you’re making the voyage back to the motherland! Whilst I don’t blame you (the mountains are calling), I will miss our lunchtime chats about everything and anything! 
+    All the best! – Tandia`,
+
+    `BT, You will be missed in the office — from nerdy knowledge to niche music genres. Wish you the best back in your Norwegian roots, maybe a hut without too much concrete. 
+    – Johannes`,
+
+    `BT, Wishing you all the best on this next chapter! Norway’s lucky to have ya. You’ll be missed! 
+    - Avery`,
+
+    `I’m gonna miss the opportunity to see you transforming from silent BT to crazy loud BT with a few beers. You are giving me a great excuse to come and visit Norway. With all the Viking blood that I don’t have, all the best for the future. Go hockey!! La oss dra til Norge! 
+    – Mattia`,
+
+    `Thank you for all your brilliant work and all the good vibes! You will be missed. Wish you lots of luck and love, 
+    – Susan x`,
+
+    `Dear BT, I haven’t been here for long but no one has made me feel more at home than you. I’ve enjoyed every lunch with you outside & I hope we get to do that together in the future.Wish you the best of luck & hoppas skidåkningen är bättre i Norge. 
+    – Kram, Philip`,
+
+    `Dear BT, Really sad to see you go! In this short time knowing you, it is clear that you will be dearly missed.Our lunch chats about survival tips and cabin building won’t be the same. I wish you all the best in your future endeavours! 
+    – Gab :)`,
+    
+    `Kære Bjørn-Tore. Tak for nu! Held og Lykke i Bjergende - du er og bliver konge af bjerget🫶 
+    – Aleksander`,
+
+    `Kære BT, det har været en absolut fornøjelse af have dig med i GXN og vi kommer til at savne dig! Du har et analytisk talent og en super tilgang til at skille problemer ad og løse dem, der begge nok skal virke for dig når du er tilbage i Stavanger og fjellene - hvad end du ellers finder på. 
+    Alt godt fremover, Kåre`,
+
+    `BJØRN-TORE. SORRY FOR US TO SEE YOU GO. CONCRETE DREAMS. ALL THE BEST. 
+    - ADAM`,
+
+    `Kära BT. John Torup, Kontoret (kärt barn har många namn på Teams transcribe < 3). Tusen tack för att du varit en sån fantastisk kollega och vän. Du kommer vara otroligt saknad här på Geek Central. Hoppas vi ses snart igen någonstans i Skandinavien! 
+    Stor kram, Karolina`,
+
+    `BT! Tænk at du kan finde på at forlade os. Kommer til at savne min webapp partner in crime. Det må stå på en tur til Norge. :)
+    - Ann-Britt`,
+    ];
+
+    const terminal = document.getElementById("terminal");
+    let delay = 10;
+
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    async function simulateCommandLine() {
+      const command = "print_farewell_messages.exe";
+      terminal.textContent = "C:\\Users\\GXN> ";
+      for (let c of command) {
+        terminal.textContent += c;
+        await sleep(30);
+      }
+      terminal.textContent += "\n\n";
+      await sleep(300);
+    }
+
+    async function typeWriter(text) {
+      for (let char of text) {
+        terminal.textContent += char;
+        await sleep(delay);
+      }
+      const cursor = document.createElement("span");
+      cursor.className = "cursor";
+      terminal.appendChild(cursor);
+      await sleep(500);
+      cursor.remove();
+      terminal.innerHTML += "\n\n";
+    }
+
+    async function showMessages() {
+      await simulateCommandLine();
+      for (let msg of messages) {
+        await typeWriter(msg);
+      }
+      addFinalCursor();
+    }
+
+    function addFinalCursor() {
+      terminal.innerHTML += "C:\\Users\\GXN> ";
+      const cursor = document.createElement("span");
+      cursor.className = "cursor";
+      terminal.appendChild(cursor);
+    }
+
+    showMessages();
+  </script>
+</body>
+</html>
